@@ -1,21 +1,21 @@
 package com.project.LiterAlura.models;
 
-import java.util.List;
 
 public class Libro {
 
     private String titulo;
 
-    private List<Autor> autor;
+    private Autor autor;
 
     private String idioma;
 
     private int numeroDeDescarga;
 
-    public Libro(DatosLibro datosLibro) {
+    public Libro(DatosLibro datosLibro, Autor datosAutor) {
        
             this.titulo = datosLibro.titulo();
             this.idioma = datosLibro.idioma().get(0);
+            this.autor = datosAutor;
             this.numeroDeDescarga = datosLibro.numeroDeDescarga();
     }
 
@@ -45,12 +45,11 @@ public class Libro {
         this.numeroDeDescarga = numeroDeDescarga;
     }
 
-    public List<Autor> getAutor() {
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(List<Autor> autor) {
-        autor.forEach(a -> a.setLibro(this));
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 
@@ -60,7 +59,7 @@ public class Libro {
     public String toString() {
         return "------ LIBRO ------\n"  +
                "  Titulo: " + titulo + "\n" +
-               "  Autor: " + autor + "\n" +
+               "  Autor: " + autor.getNombreAutor() + "\n" +
                "  Idioma: " +  idioma +  "\n" + 
                "  Numero de descargas: " + numeroDeDescarga + "\n" +
                "------------------";

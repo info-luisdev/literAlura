@@ -16,12 +16,9 @@ public class Principal {
     private final String URL_BASE = "https://gutendex.com/books/?search=";
     private ObtenerDatosAPI conversor = new ObtenerDatosAPI();
 
-
-
     public void mostrarMenu(){
 
         int opcion = 1;
-
         while (opcion !=0) {
             String menu =    """
                             1 - Buscar Libro Por Titulo
@@ -69,7 +66,6 @@ public class Principal {
         var nombrelibro = entrada.nextLine();
         var json = consumoAPI.obtenerDatos(URL_BASE + nombrelibro.replace(" ", "+"));
         var dato = conversor.obtenerDatos(json, Datos.class);
-        // System.out.println(dato);
         return dato;
     }
 
@@ -77,10 +73,10 @@ public class Principal {
         var datos = getDatosLibro();
         
         DatosLibro primerLibro = datos.resultado().get(0);
-        
+         
         Autor autor = new Autor(primerLibro.autor().get(0));
-
-        Libro libro = new Libro(primerLibro);
+        
+        Libro libro = new Libro(primerLibro, autor);
 
         System.out.println(libro);
 
@@ -99,7 +95,7 @@ public class Principal {
     }
 
     private void  listarLibrosPorIdioma(){
-        
+
     }
 
 }
