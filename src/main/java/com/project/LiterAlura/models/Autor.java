@@ -1,7 +1,22 @@
 package com.project.LiterAlura.models;
 
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "autores")
 public class Autor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String nombreAutor;
 
@@ -9,7 +24,9 @@ public class Autor {
 
     private int fechaFallecimiento;
 
-    private Libro libro;
+
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
+    private List<Libro> libro;
 
     public Autor(DatosAutor datosAutor) {
 
@@ -43,11 +60,11 @@ public class Autor {
         this.fechaFallecimiento = fechaFallecimiento;
     }
 
-    public Libro getLibro() {
+    public List<Libro> getLibro() {
         return libro;
     }
 
-    public void setLibro(Libro libro) {
+    public void setLibro(List<Libro> libro) {
         this.libro = libro;
     }
 

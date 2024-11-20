@@ -73,11 +73,8 @@ public class Principal {
         var datos = getDatosLibro();
         
         DatosLibro primerLibro = datos.resultado().get(0);
-         
         Autor autor = new Autor(primerLibro.autor().get(0));
-        
         Libro libro = new Libro(primerLibro, autor);
-
         System.out.println(libro);
 
     }
