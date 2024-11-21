@@ -2,7 +2,9 @@ package com.project.LiterAlura.models;
 
 import java.util.List;
 
+
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +20,8 @@ public class Autor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    
+    @Column(unique = true)
     private String nombreAutor;
 
     private int fechaNacimiento;
@@ -34,6 +38,10 @@ public class Autor {
         this.fechaNacimiento = datosAutor.fechaNacimiento();
         this.fechaFallecimiento = datosAutor.fechaFallecimiento();
         
+    }
+
+    public Autor(){
+
     }
 
     public String getNombreAutor() {

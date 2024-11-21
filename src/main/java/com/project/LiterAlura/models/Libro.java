@@ -32,7 +32,10 @@ public class Libro {
             this.numeroDeDescarga = datosLibro.numeroDeDescarga();
     }
 
-  
+    public Libro(){
+        
+    }
+
 
     public String getTitulo() {
         return titulo;
