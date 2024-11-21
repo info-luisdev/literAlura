@@ -16,10 +16,10 @@ public class LibroService {
 
     public void guardarLibro(Libro libro){
         
-        Optional<Libro> libroExistente = libroRepository.findByTitulo(libro.getTitulo());
+        Optional<Libro> libroExistente = libroRepository.findById(libro.getId());
 
         if (libroExistente.isPresent()) {
-            System.out.println("Este libro ya existe");
+            System.out.println("El libro " + libro.getTitulo() + " ya esta registrado");
         }
         else {
             libroRepository.save(libro);

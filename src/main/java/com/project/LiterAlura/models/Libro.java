@@ -1,8 +1,6 @@
 package com.project.LiterAlura.models;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -12,8 +10,8 @@ import jakarta.persistence.Table;
 public class Libro {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
 
     private String titulo;
 
@@ -25,7 +23,8 @@ public class Libro {
     private int numeroDeDescarga;
 
     public Libro(DatosLibro datosLibro, Autor datosAutor) {
-       
+
+            this.id = datosLibro.id();
             this.titulo = datosLibro.titulo();
             this.idioma = datosLibro.idioma().get(0);
             this.autor = datosAutor;
@@ -33,9 +32,16 @@ public class Libro {
     }
 
     public Libro(){
-        
+
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitulo() {
         return titulo;

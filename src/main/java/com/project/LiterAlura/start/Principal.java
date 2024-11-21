@@ -2,13 +2,11 @@ package com.project.LiterAlura.start;
 
 import java.util.Scanner;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.project.LiterAlura.models.Autor;
 import com.project.LiterAlura.models.Datos;
 import com.project.LiterAlura.models.DatosLibro;
 import com.project.LiterAlura.models.Libro;
-import com.project.LiterAlura.repository.LibroRepository;
 import com.project.LiterAlura.service.API;
 import com.project.LiterAlura.service.AutorService;
 import com.project.LiterAlura.service.LibroService;
