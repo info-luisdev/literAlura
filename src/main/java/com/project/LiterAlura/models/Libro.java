@@ -79,12 +79,13 @@ public class Libro {
 
     @Override
     public String toString() {
+
         return "------ LIBRO ------\n"  +
                "  Titulo: " + titulo + "\n" +
                "  Autor: " + autor.getNombreAutor() + "\n" +
                "  Idioma: " +  idioma +  "\n" + 
                "  Numero de descargas: " + numeroDeDescarga + "\n" +
-               "------------------";
+               "------------------\n";
     }
 
 }

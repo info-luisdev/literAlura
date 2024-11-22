@@ -1,11 +1,12 @@
 package com.project.LiterAlura.models;
 
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,7 +30,7 @@ public class Autor {
     private int fechaFallecimiento;
 
 
-    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Libro> libro;
 
     public Autor(DatosAutor datosAutor) {
@@ -68,8 +69,10 @@ public class Autor {
         this.fechaFallecimiento = fechaFallecimiento;
     }
 
-    public List<Libro> getLibro() {
-        return libro;
+    public List<String> getLibro() {
+        return libro.stream()
+                    .map(libro -> libro.getTitulo())
+                    .collect(Collectors.toList());
     }
 
     public void setLibro(List<Libro> libro) {
@@ -79,10 +82,10 @@ public class Autor {
     @Override
     public String toString() {
      
-        return "Autor: " + nombreAutor + "\n" +
+        return "\nAutor: " + nombreAutor + "\n" +
                "Fecha de nacimiento: " + fechaNacimiento + "\n" +
                "Fecha de fallecimiento: " + fechaFallecimiento + "\n" + 
-               "Libros: " + libro ;
+               "Libros: " + getLibro() + "\n";
     }
 
 }

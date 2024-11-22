@@ -15,6 +15,7 @@ public class LiterAluraApplication implements CommandLineRunner {
 
 	@Autowired
 	private AutorService autorService;
+	
 	@Autowired
 	private LibroService libroService;
 	

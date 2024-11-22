@@ -1,5 +1,6 @@
 package com.project.LiterAlura.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,24 @@ public class LibroService {
         }
     }
 
+    public void mostrarLibros(){
+        
+       List<Libro> libro = libroRepository.findAll();
+
+        libro.forEach(System.out::println);
+        
+    }
+
+    public Libro mostrarLibrosPorIdioma(String idioma){
+        
+        Optional<Libro> librosPorIdioma = libroRepository.mostrarLibrosPorIdioma(idioma);
+
+        if (librosPorIdioma.isPresent()) {
+            return librosPorIdioma.get();
+        }
+        else {
+            return null;
+        }
+    }
 
 }

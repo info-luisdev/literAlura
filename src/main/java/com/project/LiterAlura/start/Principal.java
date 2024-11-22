@@ -97,19 +97,30 @@ public class Principal {
     }
 
     private void listarLibrosRegistrados(){
-
+        libroService.mostrarLibros();
     }
 
     private void listarAutoresRegistrados(){
-
+        autorService.mostrarAutores();
     }
 
     private void listarAutoresVivosPorPerido(){
-        
+        System.out.println("Ingrese el año vivo de autor(es) que desea buscar: ");
+        Integer añoExistente = entrada.nextInt();
+        entrada.nextLine();
+        System.out.println(autorService.autoresVivosPorPeriodos(añoExistente));
     }
 
-    private void  listarLibrosPorIdioma(){
-
+    private void listarLibrosPorIdioma(){
+        System.out.println("""
+                            Ingrese el idioma para buscar los libros:
+                            es - español
+                            en - ingles 
+                            fr - frances
+                            pt - portugues
+                            """);
+        String idioma = entrada.nextLine();
+        System.out.println(libroService.mostrarLibrosPorIdioma(idioma));;
     }
 
 }

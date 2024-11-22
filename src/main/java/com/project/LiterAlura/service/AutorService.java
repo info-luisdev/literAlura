@@ -1,5 +1,6 @@
 package com.project.LiterAlura.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,4 +26,24 @@ public class AutorService {
             return repository.save(autor);
         }
     }
+
+    public void mostrarAutores(){
+        
+        List<Autor> autoresRegistrados = repository.findAll();
+
+        autoresRegistrados.forEach(System.out::println);
+    }
+
+    public Autor autoresVivosPorPeriodos(Integer añoLimite){
+
+        Optional<Autor> autoresVivos = repository.autoresVivosPorPeriodo(añoLimite);
+
+        if (autoresVivos.isPresent()) {
+            return autoresVivos.get();
+        }
+        else {
+            return null;
+        }
+    }
+
 }
