@@ -74,37 +74,49 @@ public class Principal {
                 }    
                 
             } catch (InputMismatchException e) {
-                System.out.println("Error: Ingrese una opcion numerica valida");
+                System.out.println("Error: Ingrese una opcion valida.");
                 entrada.nextLine();
 
             }
         }
     }
     public Datos getDatosLibro(){
+        
         System.out.println("Ingrese el nombre del libro que desea buscar: ");
         var nombrelibro = entrada.nextLine();
-        var json = consumoAPI.obtenerDatos(URL_BASE + nombrelibro.replace(" ", "%20"));
-        var dato = conversor.obtenerDatos(json, Datos.class);
-        return dato;
+        if (nombrelibro.isEmpty()) {
+            return null;
+        } else {
+            var json = consumoAPI.obtenerDatos(URL_BASE + nombrelibro.replace(" ", "%20"));
+            var dato = conversor.obtenerDatos(json, Datos.class);
+            return dato;
+        }
         
     }
 
     private void buscarLibro(){
-        var datos = getDatosLibro();
 
-        if (datos.resultado().isEmpty()) {
-            System.out.println("\nLibro no encontrado");
-        } else {
-        
-        DatosLibro primerLibro = datos.resultado().get(0);
+        try {
+            var datos = getDatosLibro();
 
-        Autor autor = new Autor(primerLibro.autor().get(0));
-        
-        Autor autorExistente = autorService.guardarAutor(autor);
-
-        Libro libro = new Libro(primerLibro, autorExistente);
-        libroService.guardarLibro(libro);
+            if (datos.resultado().isEmpty()) {
+                System.out.println("\nLibro no encontrado");
+            } else {
+            
+            DatosLibro primerLibro = datos.resultado().get(0);
+    
+            Autor autor = new Autor(primerLibro.autor().get(0));
+            
+            Autor autorExistente = autorService.guardarAutor(autor);
+    
+            Libro libro = new Libro(primerLibro, autorExistente);
+            libroService.guardarLibro(libro);
+            }
+            
+        } catch (NullPointerException e) {
+            System.out.println("Ingresaste un espacio, debes ingresar un titulo valido.");
         }
+        
 
     }
 
