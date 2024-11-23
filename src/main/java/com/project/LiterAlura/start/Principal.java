@@ -44,7 +44,8 @@ public class Principal {
             System.out.println(menu);
             try {
                 opcion = entrada.nextInt();
-                
+                entrada.nextLine();
+
                 switch (opcion) {
 
                     case 1:
@@ -85,10 +86,15 @@ public class Principal {
         var json = consumoAPI.obtenerDatos(URL_BASE + nombrelibro.replace(" ", "%20"));
         var dato = conversor.obtenerDatos(json, Datos.class);
         return dato;
+        
     }
 
     private void buscarLibro(){
         var datos = getDatosLibro();
+
+        if (datos.resultado().isEmpty()) {
+            System.out.println("\nLibro no encontrado");
+        } else {
         
         DatosLibro primerLibro = datos.resultado().get(0);
 
@@ -98,7 +104,7 @@ public class Principal {
 
         Libro libro = new Libro(primerLibro, autorExistente);
         libroService.guardarLibro(libro);
-        System.out.println(libro);
+        }
 
     }
 
@@ -114,7 +120,7 @@ public class Principal {
         System.out.println("Ingrese el año vivo de autor(es) que desea buscar: ");
         Integer añoExistente = entrada.nextInt();
         entrada.nextLine();
-        System.out.println(autorService.autoresVivosPorPeriodos(añoExistente));
+        autorService.autoresVivosPorPeriodos(añoExistente);
     }
 
     private void listarLibrosPorIdioma(){
@@ -126,7 +132,7 @@ public class Principal {
                             pt - portugues
                             """);
         String idioma = entrada.nextLine();
-        System.out.println(libroService.mostrarLibrosPorIdioma(idioma));;
+        libroService.mostrarLibrosPorIdioma(idioma);
     }
 
 }

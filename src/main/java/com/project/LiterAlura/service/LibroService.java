@@ -20,10 +20,11 @@ public class LibroService {
         Optional<Libro> libroExistente = libroRepository.findById(libro.getId());
 
         if (libroExistente.isPresent()) {
-            System.out.println("El libro " + libro.getTitulo() + " ya esta registrado");
+            System.out.println("El libro " + libro.getTitulo() + " ya esta registrado. \nNo se puede registrar el mismo libro mas de una vez.");
         }
         else {
             libroRepository.save(libro);
+            System.out.println(libro);
         }
     }
 
@@ -35,15 +36,15 @@ public class LibroService {
         
     }
 
-    public Libro mostrarLibrosPorIdioma(String idioma){
+    public void mostrarLibrosPorIdioma(String idioma){
         
-        Optional<Libro> librosPorIdioma = libroRepository.mostrarLibrosPorIdioma(idioma);
+        List<Libro> librosPorIdioma = libroRepository.mostrarLibrosPorIdioma(idioma);
 
-        if (librosPorIdioma.isPresent()) {
-            return librosPorIdioma.get();
+        if (librosPorIdioma.isEmpty()) {
+            System.out.println("No se encontraron libros con ese idioma");
         }
         else {
-            return null;
+            librosPorIdioma.forEach(System.out::println);
         }
     }
 

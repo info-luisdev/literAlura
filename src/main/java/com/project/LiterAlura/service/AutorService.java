@@ -34,15 +34,15 @@ public class AutorService {
         autoresRegistrados.forEach(System.out::println);
     }
 
-    public Autor autoresVivosPorPeriodos(Integer añoLimite){
+    public void autoresVivosPorPeriodos(Integer añoLimite){
 
-        Optional<Autor> autoresVivos = repository.autoresVivosPorPeriodo(añoLimite);
+        List<Autor> autoresVivos = repository.autoresVivosPorPeriodo(añoLimite);
 
-        if (autoresVivos.isPresent()) {
-            return autoresVivos.get();
+        if (autoresVivos.isEmpty()) {
+            System.out.println("No se encontraron autores vivos en esa fecha");
         }
         else {
-            return null;
+            autoresVivos.forEach(System.out::println);
         }
     }
 

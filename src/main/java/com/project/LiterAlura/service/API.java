@@ -24,11 +24,11 @@ public class API {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
         } 
         catch (HttpTimeoutException  error) {
-            System.out.println("Error del Servidor: Tiempo de Respuesta Agotado" + response.statusCode());
+            System.out.println("Error del Servidor: Tiempo de Respuesta Agotado");
         } catch (UnknownHostException  error) {
-            System.out.println("Error: El recurso no pudo ser encontrado " + response.statusCode());
+            System.out.println("Error: El recurso no pudo ser encontrado ");
         } catch (ConnectException  error) {
-            System.out.println("Error del Servidor: Error de Conexion " + response.statusCode());
+            System.out.println("Error del Servidor: Error de Conexion ");
         } 
         catch (IOException e) {
             throw new RuntimeException(e);
