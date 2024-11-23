@@ -1,5 +1,6 @@
 package com.project.LiterAlura.start;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -32,7 +33,7 @@ public class Principal {
         int opcion = 1;
         while (opcion !=0) {
             String menu =    """
-                            1 - Buscar Libro Por Titulo
+                            \n1 - Buscar Libro Por Titulo
                             2 - Listar Libros Registrados
                             3 - Listar Autores Registrados
                             4 - Listar Autores Vivos en un determinado año
@@ -41,36 +42,41 @@ public class Principal {
                             0 - Salir
                             """;
             System.out.println(menu);
-            opcion = entrada.nextInt();
-            entrada.nextLine();
+            try {
+                opcion = entrada.nextInt();
+                
+                switch (opcion) {
 
-            switch (opcion) {
+                    case 1:
+                        buscarLibro();
+                        break;
+                    case 2:
+                        listarLibrosRegistrados();
+                        break;
+    
+                    case 3:
+                        listarAutoresRegistrados(); 
+                        break;
+                    case 4: 
+                        listarAutoresVivosPorPerido();
+                        break;
+                    case 5: 
+                        listarLibrosPorIdioma();
+                        break;
+    
+                    case 0:
+                        System.out.println("Has salido de la aplicacion");
+                        break;
+                    default:
+                        System.out.println("Opcion Invalida. Vuelve a intentar");
+                        break;
+                }    
+                
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Ingrese una opcion numerica valida");
+                entrada.nextLine();
 
-                case 1:
-                    buscarLibro();
-                    break;
-                case 2:
-                    listarLibrosRegistrados();
-                    break;
-
-                case 3:
-                    listarAutoresRegistrados(); 
-                    break;
-                case 4: 
-                    listarAutoresVivosPorPerido();
-                    break;
-                case 5: 
-                    listarLibrosPorIdioma();
-                    break;
-
-                case 0:
-                    System.out.println("Has salido de la aplicacion");
-                    break;
-                default:
-                    System.out.println("Opcion Invalida. Vuelve a intentar");
-                    break;
             }
-
         }
     }
     public Datos getDatosLibro(){
